@@ -1,0 +1,39 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* スクロール禁止 */
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #ff3b30; /* 緊急停止っぽい赤 */
+  color: white;
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  /* 【重要】ブラウザのダブルタップ判定などを無効化し、反応速度を上げる */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを消す */
+  transition: background-color 0.1s;
+}
+
+/* 押した瞬間の色変化（フィードバック） */
+button:active {
+  background-color: #c0392b;
+}
