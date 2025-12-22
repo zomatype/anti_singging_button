@@ -21,9 +21,9 @@ const trigger = (e) => {
   sound.play();
 
   // 視覚的フィードバック（ボタンの文字を変えるなど）
-  btn.innerText = "SHUT DOWN!!";
+  btn.innerText = "歌わないよ!";
   setTimeout(() => {
-    btn.innerText = "STOP!";
+    btn.innerText = "やめさせる";
   }, 1000);
 
   // スマホのバイブレーション（50ms）
