@@ -8,7 +8,6 @@ const sound = new Howl({
 });
 
 const btn = document.getElementById("stopper-btn");
-// テキストを変更するための要素を取得
 const btnText = btn.querySelector(".btn-text");
 
 const trigger = (e) => {
@@ -27,19 +26,15 @@ const trigger = (e) => {
   void btn.offsetWidth;
   btn.classList.add("active");
 
-  // --- テキストの変更処理 ---
-  // ボタン全体ではなく、テキスト用spanの中身だけを変える
   btnText.innerText = "歌わないよ!";
 
   // 既存のタイマーがあればリセット
   if (btn.timer) clearTimeout(btn.timer);
 
-  // 1秒後に元に戻す
   btn.timer = setTimeout(() => {
     btnText.innerText = "やめさせる";
-    btn.classList.remove("active"); // バツ印も消す
+    btn.classList.remove("active");
   }, 1000);
-  // -----------------------
 
   if (navigator.vibrate) {
     navigator.vibrate(50);

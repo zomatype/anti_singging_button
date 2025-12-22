@@ -47,9 +47,6 @@ button:active {
   -webkit-user-drag: none;
 }
 
-/* バツ印（テキストより手前に出るように z-index を調整しても良いが、今回はテキストの下、猫の上にするか、一番上にするか） */
-/* ここでは「猫 < テキスト < バツ」または「猫 < バツ < テキスト」の順序が考えられます。
-   バツは「否定」の意味合いが強いので、一番手前（テキストの上）に出します。 */
 .batsu-img {
   position: absolute;
   top: 65%;
@@ -75,12 +72,12 @@ button:active {
   font-weight: 900;
   white-space: nowrap;
 
-  /* 極太の縁取りで目立たせる */
+  /* 縁取りで目立たせる */
   text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, -3px 3px 0 #000,
     3px -3px 0 #000, 3px 0 0 #000, -3px 0 0 #000, 0 3px 0 #000, 0 -3px 0 #000,
-    0 0 15px rgba(0, 0, 0, 0.8); /* 影も追加 */
+    0 0 15px rgba(0, 0, 0, 0.8);
 
-  z-index: 15; /* バツより更に手前に表示して文字を隠さない */
+  z-index: 15;
   pointer-events: none;
 }
 
