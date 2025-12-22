@@ -8,32 +8,121 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* スクロール禁止 */
+  overflow: hidden;
+  background-color: #ffffff;
 }
 
 #app {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
-  width: 100%;
-  height: 100%;
+  position: relative; /* 子要素の配置基準 */
+  width: auto;
+  height: auto;
+  background: none;
   border: none;
-  background-color: #ff3b30; /* 緊急停止っぽい赤 */
-  color: white;
-  font-size: 4rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  padding: 0;
   cursor: pointer;
-
-  /* 【重要】ブラウザのダブルタップ判定などを無効化し、反応速度を上げる */
   touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを消す */
-  transition: background-color 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s;
 }
 
-/* 押した瞬間の色変化（フィードバック） */
 button:active {
-  background-color: #c0392b;
+  transform: scale(0.95);
+}
+
+/* 猫の画像 */
+.cat-img {
+  display: block;
+  max-width: 80vw;
+  max-height: 60vh;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* バツ印（テキストより手前に出るように z-index を調整しても良いが、今回はテキストの下、猫の上にするか、一番上にするか） */
+/* ここでは「猫 < テキスト < バツ」または「猫 < バツ < テキスト」の順序が考えられます。
+   バツは「否定」の意味合いが強いので、一番手前（テキストの上）に出します。 */
+.batsu-img {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  width: 30%;
+  height: auto;
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10; /* テキストより上に表示 */
+}
+
+/* テキストのスタイル */
+.btn-text {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: white;
+  /* サイズアップ */
+  font-size: 4rem;
+  font-weight: 900;
+  white-space: nowrap;
+
+  /* 極太の縁取りで目立たせる */
+  text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, -3px 3px 0 #000,
+    3px -3px 0 #000, 3px 0 0 #000, -3px 0 0 #000, 0 3px 0 #000, 0 -3px 0 #000,
+    0 0 15px rgba(0, 0, 0, 0.8); /* 影も追加 */
+
+  z-index: 15; /* バツより更に手前に表示して文字を隠さない */
+  pointer-events: none;
+}
+
+/* バツ印アニメーション */
+.active .batsu-img {
+  animation: stamp-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* 背景フラッシュ */
+.flash-effect {
+  animation: flash-bg 0.3s ease-out;
+}
+
+@keyframes flash-bg {
+  0% {
+    background-color: #ffffff;
+  }
+  25% {
+    background-color: #ffcccc;
+  }
+  50% {
+    background-color: #ffffff;
+  }
+  75% {
+    background-color: #ffcccc;
+  }
+  100% {
+    background-color: #ffffff;
+  }
 }
